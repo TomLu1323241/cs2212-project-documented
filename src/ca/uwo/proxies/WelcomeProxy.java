@@ -21,13 +21,16 @@ public class WelcomeProxy extends Proxy {
 	public WelcomeProxy() {
 	}
 
+	public void SetSuccessor(Proxy successor) {
+		this.successor = successor;
+	}
+	
 	/* (non-Javadoc)
 	 * @see ca.uwo.frontend.interfaces.FacadeCommands#placeOrder(java.util.Map, ca.uwo.client.Buyer)
 	 */
 	@Override
 	public void placeOrder(Map<String, Integer> orderDetails, Buyer buyer) {
-		Facade facade = new Facade();
-		facade.placeOrder(orderDetails, buyer);
+		successor.placeOrder(orderDetails, buyer);
 	}
 
 	/* (non-Javadoc)
@@ -35,8 +38,7 @@ public class WelcomeProxy extends Proxy {
 	 */
 	@Override
 	public void restock(Map<String, Integer> restockDetails, Supplier supplier) {
-		Facade facade = new Facade();
-		facade.restock(restockDetails, supplier);
+		successor.restock(restockDetails, supplier);
 	}
 
 }

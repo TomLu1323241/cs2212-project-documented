@@ -7,5 +7,7 @@ import ca.uwo.frontend.interfaces.FacadeCommands;
  * The base class for the implementation of Proxy design pattern, which provides interfaces 
  * to the {@link ca.uwo.client.Client} for accessing the system.
  */
-public abstract class Proxy implements FacadeCommands{}
-
+public abstract class Proxy implements FacadeCommands {
+	protected Proxy successor;
+	
+}

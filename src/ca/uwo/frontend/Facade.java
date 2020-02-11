@@ -40,7 +40,6 @@ public class Facade implements FacadeCommands {
 		//accordingly and the buyer needs to make the payment using the invoice.
 		System.out.println("Facade: ");
 		// Create order
-		Order order = new Order();
 		System.out.println("\tPlacing Order");
 		// Deplete stock
 		System.out.println("\tCreating Invoice");

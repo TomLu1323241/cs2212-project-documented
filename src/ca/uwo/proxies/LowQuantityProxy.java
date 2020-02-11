@@ -27,7 +27,7 @@ public class LowQuantityProxy extends Proxy{
 	}
 
 	@Override
-	public void restock(Map<String, Integer> restockDetails, Supplier supplier) {
+	public void restock(Map<String, Integer> restockDetails, Supplier supplier) {// Not used as SupplierProxy already handled it
 		// TODO Auto-generated method stub
 		
 	}

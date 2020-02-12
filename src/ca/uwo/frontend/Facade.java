@@ -40,11 +40,18 @@ public class Facade implements FacadeCommands {
 		//accordingly and the buyer needs to make the payment using the invoice.
 		System.out.println("Facade: ");
 		// Create order
+		Order order = createOrder(orderDetails, buyer.getUserName());
+		
 		System.out.println("\tPlacing Order");
 		// Deplete stock
+		controller.depleteStock(order);
+		
 		System.out.println("\tCreating Invoice");
 		// Create invoice for order
+		Invoice invoice = controller.createInvoice();
+		
 		// Receive payment from client
+		buyer.pay(invoice);
 	}
 	
 	/* (non-Javadoc)
@@ -56,9 +63,12 @@ public class Facade implements FacadeCommands {
 		//replenished accordingly and the supplier need to get paid.
 		System.out.println("Facade: ");
 		// Create the order
+		Order stockOrder = createOrder(restockDetails, supplier.toString());
 		System.out.println("\tReplenishing Stock");
 		// Replenish stock according to order
+		controller.replenishStock(stockOrder);
 		// Pay the supplier
+		bank.paySupplier(supplier);
 	}
 	
 	/**

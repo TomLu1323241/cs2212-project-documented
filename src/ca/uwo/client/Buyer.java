@@ -2,6 +2,9 @@ package ca.uwo.client;
 
 import java.util.Map;
 
+import ca.uwo.proxies.HighQuantityProxy;
+import ca.uwo.proxies.LowQuantityProxy;
+import ca.uwo.proxies.SupplierProxy;
 import ca.uwo.proxies.WelcomeProxy;
 import ca.uwo.utils.Invoice;
 
@@ -40,8 +43,17 @@ public class Buyer extends Client {
 		}
 		System.out.println("My name is :" + this.userName + " and I'm buying : ");
 		System.out.println(orderDetails);
-		WelcomeProxy proxy = new WelcomeProxy();
-		proxy.placeOrder(orderDetails, this);
+		
+		WelcomeProxy welcomeProxy = new WelcomeProxy();
+		SupplierProxy supplierProxy = new SupplierProxy();
+		LowQuantityProxy lowQuantityProxy = new LowQuantityProxy();
+		HighQuantityProxy highQuantityProxy = new HighQuantityProxy();
+		
+		welcomeProxy.SetSuccessor(supplierProxy);
+		supplierProxy.SetSuccessor(lowQuantityProxy);
+		lowQuantityProxy.SetSuccessor(highQuantityProxy);
+		
+		welcomeProxy.placeOrder(orderDetails, this);
 	}
 	
 	/**

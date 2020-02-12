@@ -30,7 +30,11 @@ public class WelcomeProxy extends Proxy {
 	 */
 	@Override
 	public void placeOrder(Map<String, Integer> orderDetails, Buyer buyer) {
-		successor.placeOrder(orderDetails, buyer);
+		if (successor != null) {
+			successor.placeOrder(orderDetails, buyer);
+		} else {
+			System.out.println("Successor of WelcomeProxy not set");
+		}
 	}
 
 	/* (non-Javadoc)

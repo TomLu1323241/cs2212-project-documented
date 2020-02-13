@@ -40,7 +40,8 @@ public class Facade implements FacadeCommands {
 		//accordingly and the buyer needs to make the payment using the invoice.
 		System.out.println("Facade: ");
 		// Create order
-		Order order = createOrder(orderDetails, buyer.getUserName());
+		String name = buyer.getUserName();
+		Order order = createOrder(orderDetails, name);
 		
 		System.out.println("\tPlacing Order");
 		// Deplete stock
@@ -63,7 +64,7 @@ public class Facade implements FacadeCommands {
 		//replenished accordingly and the supplier need to get paid.
 		System.out.println("Facade: ");
 		// Create the order
-		Order stockOrder = createOrder(restockDetails, supplier.toString());
+		Order stockOrder = createOrder(restockDetails, null);
 		System.out.println("\tReplenishing Stock");
 		// Replenish stock according to order
 		controller.replenishStock(stockOrder);

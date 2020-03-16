@@ -2,6 +2,9 @@ package ca.uwo.client;
 
 import java.util.Map;
 
+import ca.uwo.proxies.HighQuantityProxy;
+import ca.uwo.proxies.LowQuantityProxy;
+import ca.uwo.proxies.SupplierProxy;
 import ca.uwo.proxies.WelcomeProxy;
 
 /**
@@ -15,7 +18,11 @@ public class Supplier extends Client {
 	 * @param restockDetails  the name and quantity of each restocked item.
 	 */
 	public void supply(Map<String, Integer> restockDetails) {
-		WelcomeProxy proxy = new WelcomeProxy();
-		proxy.restock(restockDetails,this);
+		WelcomeProxy welcomeProxy = new WelcomeProxy();
+		SupplierProxy supplierProxy = new SupplierProxy();
+		
+		welcomeProxy.SetSuccessor(supplierProxy);
+		
+		welcomeProxy.restock(restockDetails,this);
 	}
 }

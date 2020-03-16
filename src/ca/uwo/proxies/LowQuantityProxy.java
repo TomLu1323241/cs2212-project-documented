@@ -1,6 +1,7 @@
 package ca.uwo.proxies;
 
 import java.util.Map;
+import java.util.Scanner;
 
 import ca.uwo.client.Buyer;
 import ca.uwo.client.Supplier;
@@ -14,22 +15,46 @@ public class LowQuantityProxy extends Proxy{
 
 	@Override
 	public void placeOrder(Map<String, Integer> orderDetails, Buyer buyer) {
-		if (orderDetails.size() > 10) {// If more than 10 orders, place order is handled by HighQuantityProxy
-			if (successor != null) {
-				successor.placeOrder(orderDetails, buyer);
+		if(authenticate(buyer) == true) {
+			if (orderDetails.size() > 10) {// If more than 10 orders, place order is handled by HighQuantityProxy
+				if (successor != null) {
+					successor.placeOrder(orderDetails, buyer);
+				} else {
+					System.out.println("Did not set successor of LowQuantityProxy");
+				}
 			} else {
-				System.out.println("Did not set successor of LowQuantityProxy");
+				Facade facade = new Facade();
+				facade.placeOrder(orderDetails, buyer);
 			}
-		} else {
-			Facade facade = new Facade();
-			facade.placeOrder(orderDetails, buyer);
 		}
+		else {System.out.println("User authentication failed!");}
 	}
 
 	@Override
 	public void restock(Map<String, Integer> restockDetails, Supplier supplier) {// Not used as SupplierProxy already handled it
 		// TODO Auto-generated method stub
 		
+	}
+	
+	//authenticates the buyer before the order may proceed, implementing the proxy design pattern
+	private boolean authenticate(Buyer b) {
+		Scanner input = new Scanner(System.in);//create a scanner to take user input
+		
+		//process login information
+		String username, password;
+		while(true) {
+			System.out.println("Login");
+			System.out.println("username: ");
+			username = input.next();
+			
+			System.out.println("password: ");
+			password = input.next();
+			
+			//success
+			if(username.equals(b.getUserName()) && password.equals(b.getPassword())) {return true;}
+			//failure
+			else {return false;}
+		}
 	}
 
 }

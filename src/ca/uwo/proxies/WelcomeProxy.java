@@ -15,12 +15,21 @@ import ca.uwo.frontend.Facade;
  * design pattern.
  */
 public class WelcomeProxy extends Proxy {
+	private static WelcomeProxy instance = null;
+	
 	/**
 	 * constructor for WelcomeProxy class.
 	 */
 	public WelcomeProxy() {
 	}
 
+	public static WelcomeProxy getInstance() {
+		if (instance == null)
+			instance = new WelcomeProxy();
+		
+		return instance;
+	}
+	
 	public void SetSuccessor(Proxy successor) {
 		this.successor = successor;
 	}

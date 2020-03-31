@@ -8,6 +8,15 @@ import ca.uwo.frontend.Facade;
 
 public class SupplierProxy extends Proxy {
 
+	private static SupplierProxy instance = null;
+	
+	public static SupplierProxy getInstance() {
+		if (instance == null)
+			instance = new SupplierProxy();
+		
+		return instance;
+	}
+	
 	public void SetSuccessor(Proxy successor) {
 		this.successor = successor;
 	}

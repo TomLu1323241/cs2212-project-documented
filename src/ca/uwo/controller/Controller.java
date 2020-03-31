@@ -2,6 +2,7 @@ package ca.uwo.controller;
 
 import ca.uwo.utils.Invoice;
 import ca.uwo.utils.Order;
+import ca.uwo.viewer.StockManager;
 
 /**
  * @author kkontog, ktsiouni, mgrigori
@@ -14,6 +15,18 @@ public class Controller {
 	private ReplenishStockOperation replenishStockOp;
 	
 	Order currentOrder = null;
+	
+	private static Controller instance = null;
+	
+	/**
+	 * return the current instance
+	 */
+	public static Controller getInstance() {
+		if (instance == null)
+			instance = new Controller();
+		
+		return instance;
+	}
 	
 	/**
 	 * deplete the stock after placing the order.

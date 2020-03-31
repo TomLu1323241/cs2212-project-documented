@@ -6,6 +6,7 @@ import java.util.Map;
 import ca.uwo.dataAccess.DataManager;
 import ca.uwo.utils.ItemResult;
 import ca.uwo.utils.OrderItem;
+import ca.uwo.viewer.StockManager;
 
 /**
  * @author kkontog, ktsiouni, mgrigori
@@ -15,7 +16,19 @@ public class ItemRepository {
 	
 	private Map<String, Item> savedItems;
 	private DataManager dataManager;
-
+	
+	private static ItemRepository instance = null;
+	
+	/**
+	 * return current instance
+	 */
+	public static ItemRepository getInstance() {
+		if (instance == null)
+			instance = new ItemRepository();
+		
+		return instance;
+	}
+	
 	/**
 	 * update the quantity of item in the database for the deplete operation.
 	 * @param orderItem one entry in the order.

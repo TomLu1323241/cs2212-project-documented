@@ -9,6 +9,15 @@ import ca.uwo.frontend.Facade;
 
 public class LowQuantityProxy extends Proxy{
 	
+	public static LowQuantityProxy instance = null;
+	
+	public static LowQuantityProxy getInstance() {
+		if (instance == null)
+			instance = new LowQuantityProxy();
+		
+		return instance;
+	}
+	
 	public void SetSuccessor(Proxy successor) {
 		this.successor = successor;
 	}

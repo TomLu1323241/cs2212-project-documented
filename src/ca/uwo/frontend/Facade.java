@@ -11,6 +11,7 @@ import ca.uwo.frontend.interfaces.FacadeCommands;
 import ca.uwo.utils.Invoice;
 import ca.uwo.utils.Order;
 import ca.uwo.utils.OrderItem;
+import ca.uwo.viewer.StockManager;
 
 /**
  * @author kkontog, ktsiouni, mgrigori
@@ -22,6 +23,8 @@ public class Facade implements FacadeCommands {
 	private Controller controller;
 	private BankingTransactions bank;
 	
+	private static Facade instance = null;
+	
 	/**
 	 * constructor for Facade class.
 	 */
@@ -29,6 +32,16 @@ public class Facade implements FacadeCommands {
 		super();
 		this.controller = new Controller();
 		this.bank = new BankingTransactions();
+	}
+	
+	/**
+	 * return current instance
+	 */
+	public static Facade getInstance() {
+		if (instance == null)
+			instance = new Facade();
+		
+		return instance;
 	}
 	
 	/* (non-Javadoc)

@@ -8,8 +8,16 @@ import ca.uwo.frontend.Facade;
 
 public class HighQuantityProxy extends Proxy {
 	
+	private static HighQuantityProxy instance = null;
 	boolean auth = true;// IDK IAN DO STUFF
 
+	public static HighQuantityProxy getInstance() {
+		if (instance == null)
+			instance = new HighQuantityProxy();
+		
+		return instance;
+	}
+	
 	@Override
 	public void placeOrder(Map<String, Integer> orderDetails, Buyer buyer) {
 		if (auth) {
